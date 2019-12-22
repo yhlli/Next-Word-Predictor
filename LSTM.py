@@ -12,16 +12,17 @@ import os
 path = '1661-0.txt'
 text = open(path, encoding='utf8').read().lower()
 tokenizer = RegexpTokenizer(r'\w+')
-words = tokenizer.tokenize(text)
-uniqwords = np.unique(words)
+word = tokenizer.tokenize(text)
+uniqwords = np.unique(word)
 uniqwordsindex = dict((c, i) for i, c in enumerate(uniqwords))
 wlength = 5
 prevwords = []
 nextwords = []
-for i in range(len(words) - wlength):
-    prevwords.append(words[i:i + wlength])
-    nextwords.append(words[i+ wlength])
+for i in range(len(word) - wlength):
+    prevwords.append(word[i:i + wlength])
+    nextwords.append(word[i+ wlength])
 
+# OneHotEncode the data
 X = np.zeros((len(prevwords), wlength, len(uniqwords)), dtype=bool)
 Y = np.zeros((len(nextwords), len(uniqwords)), dtype=bool)
 for i, each_words in enumerate(prevwords):
@@ -46,6 +47,7 @@ else:
     history = pickle.load(open("history.p", "rb"))
 
 
+# onehotencode the input
 def prepare_input(text):
     x = np.zeros((1, wlength, len(uniqwords)))
     for t, word in enumerate(text.split()):
@@ -71,9 +73,9 @@ def predict_completions(text, n=3):
     return [uniqwords[idx] for idx in next_indices]
 
 
-q = "hello this is a test"
-tokens = tokenizer.tokenize(q)
-print("correct sentence: ",q)
-seq = " ".join(tokenizer.tokenize(q.lower())[(len(tokens)-5):len(tokens)])
-print("Sequence: ",seq)
-print("next possible words: ", predict_completions(seq, 5))
+def inputString(instring):
+    q = instring
+    tokens = tokenizer.tokenize(q)
+    seq = " ".join(tokenizer.tokenize(q.lower())[(len(tokens) - 5):len(tokens)])
+    return predict_completions(seq, 5)
+
