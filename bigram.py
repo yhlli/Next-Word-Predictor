@@ -22,7 +22,9 @@ def getBigrams(text):
     genword = ''
     webword = ''
     if text in textgod:
-        genword = list(fd1[text])[0]
+        if len(list(fd1[text]))>0:
+            genword = list(fd1[text])[0]
     if text in textweb:
-        webword = list(fd[text])[0]
+        if len(list(fd[text])) > 0:
+            webword = list(fd[text])[0]
     return webword, genword
