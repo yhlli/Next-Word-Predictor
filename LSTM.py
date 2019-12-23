@@ -30,7 +30,7 @@ for i, each_words in enumerate(prevwords):
         X[i, j, uniqwordsindex[each_word]] = 1
     Y[i, uniqwordsindex[nextwords[i]]] = 1
 
-if not os.path.exists('saved_models/keras_next_word_model.h5'):
+if not os.path.exists('keras_next_word_model.h5'):
     model = Sequential()
     model.add(LSTM(128, input_shape=(wlength, len(uniqwords))))
     model.add(Dense(len(uniqwords)))
