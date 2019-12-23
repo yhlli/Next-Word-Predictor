@@ -5,3 +5,4 @@ RUN MAIN.PY
  
 PRETRAINED MODEL: keras_next_word_model.h5
 
+Wordpredictor2.py is separate
