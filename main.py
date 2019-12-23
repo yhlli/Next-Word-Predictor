@@ -27,7 +27,7 @@ while text != 'exit':
         i+=1
     number = input()
     if str(number)=='exit':
-        break;
+        break
     while int(number)>i-1 and int(number)!=0:
         print('Please enter a valid number')
         number = input()
