@@ -9,7 +9,7 @@ import heapq
 import os
 
 
-path = 'data/Holmes.txt'
+path = '1661-0.txt'
 text = open(path, encoding='utf8').read().lower()
 tokenizer = RegexpTokenizer(r'\w+')
 word = tokenizer.tokenize(text)
@@ -40,10 +40,10 @@ if not os.path.exists('saved_models/keras_next_word_model.h5'):
     model.compile(loss='categorical_crossentropy', optimizer=optimizer, metrics=['accuracy'])
     history = model.fit(X, Y, validation_split=0.05, batch_size=128, epochs=2, shuffle=True).history
 
-    model.save('saved_models/keras_next_word_model.h5')
+    model.save('keras_next_word_model.h5')
     pickle.dump(history, open("history.p", "wb"))
 else:
-    model = load_model('saved_models/keras_next_word_model.h5')
+    model = load_model('keras_next_word_model.h5')
     history = pickle.load(open("history.p", "rb"))
 
 
@@ -78,4 +78,3 @@ def inputString(instring):
     tokens = tokenizer.tokenize(q)
     seq = " ".join(tokenizer.tokenize(q.lower())[(len(tokens) - 5):len(tokens)])
     return predict_completions(seq, 5)
-
