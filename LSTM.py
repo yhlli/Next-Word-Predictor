@@ -9,7 +9,7 @@ import heapq
 import os
 
 
-path = 'data/holmes.txt'
+path = 'data/Holmes.txt'
 text = open(path, encoding='utf8').read().lower()
 tokenizer = RegexpTokenizer(r'\w+')
 word = tokenizer.tokenize(text)
